@@ -66,7 +66,7 @@ const checkClick = e => {
 	} else if (e.target.matches('.edit')) {
 		editTodo()
 	} else if (e.target.matches('.delete')) {
-		console.log('delete')
+		deleteToDo(e)
 	}
 }
 const editTodo = () => {
@@ -74,6 +74,9 @@ const editTodo = () => {
 }
 const closePopup = () => {
 	popup.style.display = 'none'
+}
+const deleteToDo = (e)=>{
+	e.target.closest('li').remove()
 }
 
 document.addEventListener('DOMContentLoaded', main)
