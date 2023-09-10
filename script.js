@@ -24,6 +24,7 @@ const prepareDOMElements = () => {
 	popupInput = document.querySelector('.popup-input')
 	popupAddBtn = document.querySelector('.accept')
 	popupCloseBtn = document.querySelector('.cancel')
+	
 }
 const addNewTask = () => {
 	if (todoInput.value !== '') {
@@ -41,7 +42,7 @@ const prepareDOMEvents = () => {
 	addBtn.addEventListener('click', addNewTask)
 	ulList.addEventListener('click', checkClick)
 	popupCloseBtn.addEventListener('click', closePopup)
-
+	todoInput.addEventListener('keyup', enterKeyCheck)
 }
 const createTooolsArea = () => {
 	const toolsPanel = document.createElement('div')
@@ -71,12 +72,17 @@ const checkClick = e => {
 }
 const editTodo = () => {
 	popup.style.display = 'flex'
+
 }
 const closePopup = () => {
 	popup.style.display = 'none'
 }
 const deleteToDo = (e)=>{
 	e.target.closest('li').remove()
+}
+const enterKeyCheck =(e) =>{
+	if(e.key==='Enter')
+	addNewTask()
 }
 
 document.addEventListener('DOMContentLoaded', main)
