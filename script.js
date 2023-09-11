@@ -20,11 +20,10 @@ const prepareDOMElements = () => {
 	addBtn = document.querySelector('.btn-add')
 	ulList = document.querySelector('.todolist ul')
 	popup = document.querySelector('.popup')
-	popupInfo= document.querySelector('.popup-info')
+	popupInfo = document.querySelector('.popup-info')
 	popupInput = document.querySelector('.popup-input')
 	popupAddBtn = document.querySelector('.accept')
 	popupCloseBtn = document.querySelector('.cancel')
-	
 }
 const addNewTask = () => {
 	if (todoInput.value !== '') {
@@ -42,6 +41,7 @@ const prepareDOMEvents = () => {
 	addBtn.addEventListener('click', addNewTask)
 	ulList.addEventListener('click', checkClick)
 	popupCloseBtn.addEventListener('click', closePopup)
+	popupAddBtn.addEventListener('click', changeTodoTest)
 	todoInput.addEventListener('keyup', enterKeyCheck)
 }
 const createTooolsArea = () => {
@@ -65,24 +65,31 @@ const checkClick = e => {
 		e.target.closest('li').classList.toggle('completed')
 		e.target.classList.toggle('completed')
 	} else if (e.target.matches('.edit')) {
-		editTodo()
+		editTodo(e)
 	} else if (e.target.matches('.delete')) {
 		deleteToDo(e)
 	}
 }
-const editTodo = () => {
+const editTodo = e => {
+	todoToEdit = e.target.closest('li')
+	popupInput.value = todoToEdit.firstChild.textContent
 	popup.style.display = 'flex'
-
+}
+const deleteToDo = e => {
+	e.target.closest('li').remove()
 }
 const closePopup = () => {
 	popup.style.display = 'none'
 }
-const deleteToDo = (e)=>{
-	e.target.closest('li').remove()
+
+const enterKeyCheck = e => {
+	if (e.key === 'Enter') addNewTask()
 }
-const enterKeyCheck =(e) =>{
-	if(e.key==='Enter')
-	addNewTask()
+const changeTodoTest = () => {
+	if (popupInput.value !== '') {
+		todoToEdit.firstChild.textContent = popupInput.value
+		popup.style.display = 'none'
+	}
 }
 
 document.addEventListener('DOMContentLoaded', main)
