@@ -41,7 +41,7 @@ const prepareDOMEvents = () => {
 	addBtn.addEventListener('click', addNewTask)
 	ulList.addEventListener('click', checkClick)
 	popupCloseBtn.addEventListener('click', closePopup)
-	popupAddBtn.addEventListener('click', changeTodoTest)
+	popupAddBtn.addEventListener('click', changeTodoText)
 	todoInput.addEventListener('keyup', enterKeyCheck)
 }
 const createTooolsArea = () => {
@@ -80,15 +80,20 @@ const deleteToDo = e => {
 }
 const closePopup = () => {
 	popup.style.display = 'none'
+	popupInfo.textContent = ''
 }
 
 const enterKeyCheck = e => {
 	if (e.key === 'Enter') addNewTask()
 }
-const changeTodoTest = () => {
+const changeTodoText = () => {
 	if (popupInput.value !== '') {
 		todoToEdit.firstChild.textContent = popupInput.value
 		popup.style.display = 'none'
+		popupInfo.textContent = ''
+
+	} else {
+		popupInfo.textContent = 'Musisz podać treść'
 	}
 }
 
